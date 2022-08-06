@@ -17,6 +17,11 @@ app.get('/', (req, res) => {
 require('./routes/index.js')(app)
 
 app.listen(3001, () => {
+    db.sequelize.authenticate().then(() => {
+    console.log('DB Connection has been established successfully.');
+    }).catch((error) => {
+      console.error('Unable to connect to the database: ', error);
+    });
   db.sequelize.sync()
     .then(() => {
       console.log("Synced db.");
@@ -24,11 +29,5 @@ app.listen(3001, () => {
     .catch((err) => {
       console.log("Failed to sync db: " + err.message);
     });
-
-  db.sequelize.authenticate().then(() => {
-    console.log('DB Connection has been established successfully.');
-  }).catch((error) => {
-    console.error('Unable to connect to the database: ', error);
-  });
-  console.log('server started');
+    console.log('server started');
 });
