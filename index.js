@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./database/instance.js')
 const bodyParser = require('body-parser')
+const upload = require('./middlewares/fileUploadMiddleware')
 
 const app = express();
 
